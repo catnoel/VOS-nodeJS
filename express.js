@@ -1,8 +1,15 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (request, response) => 
-    response.send('Hello World')
+const store = {
+    "name": "cat",
+    "location": "boston",
+    "job": "developer"
+}
+app.get('/hello/', (request, response) => 
+    {const data = request.params;
+    response.send(store)
+    }
 )
 
 app.listen(8081, () => 

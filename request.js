@@ -1,24 +1,15 @@
-const request = require('request');
+const http = require('http');
 
-const dict = {
-    fname: "Cat",
-    lname: "Noel",
-    location: "Boston"
-};
-
-
-function getJSON(url, callback) {
-    request({
-        url: url,
-        json: true
-    }, function (error, response, body){
-        if (!error && response.statusCode === 200) {
-            callback(body);
-        }
-    });
+const store = {
+    "name": "cat",
+    "location": "boston",
+    "job": "developer"
 }
 
-getJSON(dict, function (body){
-    console.log('here is it: ', body);
-});
+const app = http.createServer((request, response) => 
+    response.end(store)
+)
 
+app.listen(8081);
+
+console.log('server running on port 8081');
