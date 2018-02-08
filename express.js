@@ -2,58 +2,56 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 
-const store = {
-    "cat_profile": {
-        "name": "cat",
-        "location": "boston",
-        "job": "developer"
-    },
-    "brian_profile": {
-        "name": "brian",
-        "location": "boston",
-        "job": "developer"
-    }
-}
-
-// app.get('/json/:identifier', (request, response) => {
-//     const identifier = request.params["identifier"];
-//     response.send(store[identifier])
-//     }
-// )
-
 app.use(bodyParser.text({
     type: function(req) {
         return 'text';
     }
 }));
 
+const store = {
+    "cat_profile": {
+        "name": "cat",
+        "location": "boston",
+        "job": "developer"
+    }
+}
 
-
-const postHandler = (request, response) => {
-    const storeBody = request.body;
+const get_handler = (request, response) => {
     const identifier = request.params["identifier"];
-    response.send(JSON.stringify(storeBody[identifier]));
-    //console.log(results);
-    console.log(JSON.stringify(storeBody));
-};
+    response.send(store[identifier]);
+    }
 
-const postHandler2 = (request, response) => {
-    let newProfile = new Object;
-    newProfile = request.body;
+const post_handler = (request, response) => {
+    let new_profile = request.body;
+    new_profile = JSON.parse(new_profile);
+    // if typeof new_profile is string throw error
+    if(typeof new_profile === "string") {
+        throw new Error("Service does not handle raw strings.")
+    }
     const identifier = request.params["identifier"];
-    store.cat_profile[newProfile] = request.body.identifier
+    store[identifier] = new_profile;
     console.log(store);
     response.send(store);
+};
+
+//static handler
+const my_webpage = (request, response) => {
+    response.send(`
+    <html>
+    <head>
+    </head>
+    <body>
+    <p>Hello World!</p>
+    <input placeholder="Enter a value">
+    </body>
+    </html>`)
     };
 
-app.post('/json/:identifier', postHandler2);
+app.post('/json/:identifier', post_handler);
+app.get('/json/:identifier', get_handler);
+app.get('/front_page', my_webpage);
 
-// app.put('/json/:identifier', (request, response) => {
-//     const identifier = request.params["identifier"];
-//     const data = request.body;
-//     response.send(data);
-//     }
-// )
+
 
 app.listen(8081, () => 
     console.log ('app listening on port 8081')
