@@ -34,6 +34,36 @@ const post_handler = (request, response) => {
     response.send(store);
 };
 
+const userpost_handler = (request, response) => {
+    let new_user = request.body;
+    new_user = JSON.parse(new_user);
+    new_user = {
+        first_name: new_user["name"],
+        email: new_user["email"],
+        username: new_user["username"]
+    }
+    
+    
+    console.log("Thank you " + new_user["first_name"] + "! " + 
+    "You have created username: " + new_user["username"] + 
+    " and email: " + new_user["email"] + " for your login credentials.");
+    const identifier = request.params["identifier"];
+    store[identifier] = new_user;
+    console.log(store);
+    response.send(store);
+    
+};
+// const userpost_handler2 = (request, response) => {
+
+//     let name = request.body.name;
+//     let email = request.body.email;
+//     let username = request.body.username;
+//     let password = request.body.password;
+            
+//     console.log("you posted: First Name: " + name);
+//     response.send(store);
+// };
+
 //static handler
 const my_webpage = (request, response) => {
     response.send(`
@@ -47,9 +77,11 @@ const my_webpage = (request, response) => {
     </html>`)
     };
 
-app.post('/json/:identifier', post_handler);
 app.get('/json/:identifier', get_handler);
-app.get('/front_page', my_webpage);
+//app.post('/json/:identifier', post_handler);
+//app.get('/front_page', my_webpage);
+app.post('/test', userpost_handler);
+
 
 
 
