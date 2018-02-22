@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
+const validate = require('jsonschema').validate;
+
 
 app.use(bodyParser.text({
     type: function(req) {
@@ -37,12 +39,13 @@ const post_handler = (request, response) => {
 const userpost_handler = (request, response) => {
     let new_user = request.body;
     new_user = JSON.parse(new_user);
+    console.log(validate(new_user, {"type": "object"}));
+    
     new_user = {
         first_name: new_user["name"],
         email: new_user["email"],
         username: new_user["username"]
     }
-    
     
     console.log("Thank you " + new_user["first_name"] + "! " + 
     "You have created username: " + new_user["username"] + 
