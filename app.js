@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const validate = require('jsonschema').validate;
+const capitalreserve_schema = require('./capital_reserve_schema.js');
+const USER_SCHEMA = require('./USER_SCHEMA.js');
+const STUDENTLOAN_SCHEMA = require('./student_loan_schema.js');
 
 
 app.use(bodyParser.text({
@@ -36,36 +39,24 @@ const post_handler = (request, response) => {
     response.send(store);
 };
 
-const userpost_handler = (request, response) => {
-    let new_user = request.body;
-    new_user = JSON.parse(new_user);
-    console.log(validate(new_user, {"type": "object"}));
+const all_post_handler = (request, response) => {
+
+    const request_body_json = JSON.parse(request.body);
+
+    console.log(validate(request_body_json, STUDENTLOAN_SCHEMA, { throwError: true }));
     
-    new_user = {
-        first_name: new_user["name"],
-        email: new_user["email"],
-        username: new_user["username"]
-    }
+    const new_user = request_body_json;
     
     console.log("Thank you " + new_user["first_name"] + "! " + 
     "You have created username: " + new_user["username"] + 
     " and email: " + new_user["email"] + " for your login credentials.");
+
     const identifier = request.params["identifier"];
     store[identifier] = new_user;
-    console.log(store);
-    response.send(store);
-    
-};
-// const userpost_handler2 = (request, response) => {
+    response.send(store[identifier]);
 
-//     let name = request.body.name;
-//     let email = request.body.email;
-//     let username = request.body.username;
-//     let password = request.body.password;
-            
-//     console.log("you posted: First Name: " + name);
-//     response.send(store);
-// };
+
+};
 
 //static handler
 const my_webpage = (request, response) => {
@@ -83,7 +74,7 @@ const my_webpage = (request, response) => {
 app.get('/json/:identifier', get_handler);
 //app.post('/json/:identifier', post_handler);
 //app.get('/front_page', my_webpage);
-app.post('/test', userpost_handler);
+app.post('/test', all_post_handler);
 
 
 
