@@ -1,6 +1,7 @@
 STUDENTLOAN_SCHEMA = {
     type: "object",
     properties:{
+        "unique_id": {"type": "string"},
         "first_name": {"type": "string"},
         "last_name": {"type": "string"},
         "phone_number": {
@@ -24,7 +25,7 @@ STUDENTLOAN_SCHEMA = {
         },
         "SSN": {
             "type": "string",
-            "pattern": "(\\[0-9]{3}-[0-9]{2}-[0-9]{4})"
+            "pattern": "(\\[0-9]{3}-[0-9]{2}-[0-9]{4}\\)"
         },
         "loan_name": {"type": "string"},
         "loan_status": {"type": "string"},

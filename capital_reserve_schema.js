@@ -1,6 +1,7 @@
 capitalreserve_schema = {
     type: "object",
-    propperties: {
+    properties: {
+        "unique_id": {"type": "string"},
         "first_name": {"type": "string"},
         "last_name": {"type": "string"},
         "phone_number": {

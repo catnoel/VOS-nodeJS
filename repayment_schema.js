@@ -6,7 +6,7 @@ REPAYMENT_SCHEMA = {
         "last_name": {"type": "string"},
         "phone_number": {
             "type": "string",
-            "pattern": ".*([0-9]{3}).*([0-9]{3}).*([0-9]{4}).*"
+            "pattern": "(.*([0-9]{3}).*([0-9]{3}).*([0-9]{4}).*)"
         },
         "email": {"type": "string"},
         "mailing_address": {
@@ -21,11 +21,24 @@ REPAYMENT_SCHEMA = {
         },
         "loan_name": {"type": "string"},
         "loan_status": {"type": "string"},
-        "loan_current_balance": {"type": "number"},
-        "due_date": {
+        "loan_current_balance": {"type": "string"},
+        "next_payment_amount": {"type": "string"},
+        "next_payment_date": {
                 "type": "string",
                 "pattern": "(\\[0-9]{2}/[0-9]{2}/[0-9]{4}\\)"
+        },
+        "payment_received" : {
+            "type": "object",
+            properties: {
+                "amount_paid": {"type": "number"},
+                "date_received": {
+                    "type": "string",
+                    "pattern": "(\\[0-9]{2}/[0-9]{2}/[0-9]{4}\\)" 
+                    }
+            }
         }
     }
 
 }
+
+module.exports = REPAYMENT_SCHEMA;
