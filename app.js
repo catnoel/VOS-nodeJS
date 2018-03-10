@@ -7,6 +7,7 @@ const capitalreserve_schema = require('./capital_reserve_schema.js');
 const USER_SCHEMA = require('./USER_SCHEMA.js');
 const STUDENTLOAN_SCHEMA = require('./student_loan_schema.js');
 const REPAYMENT_SCHEMA = require('./repayment_schema.js');
+const OFFER_SCHEMA = require('./offer_schema.js');
 
 
 app.use(bodyParser.text({
@@ -57,6 +58,12 @@ const all_post_handler = (request, response) => {
     const identifier = request.params["identifier"];
     store[identifier] = new_user;
     response.send(store[identifier]);
+};
+
+const offer_handler = (request, response) => {
+    const request_body_json = JSON.parse(request.body);
+    console.log(validate(request_body_json, USER_SCHEMA, { throwError: true }));
+
 };
 
 
