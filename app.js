@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
+const fs = require('fs');
 const validate = require('jsonschema').validate;
 const capitalreserve_schema = require('./capital_reserve_schema.js');
 const USER_SCHEMA = require('./USER_SCHEMA.js');
@@ -15,7 +16,6 @@ app.use(bodyParser.text({
         return 'text';
     }
 }));
-
 
 const store = {
     "cat_profile": {
@@ -46,7 +46,6 @@ const post_handler = (request, response) => {
 const all_post_handler = (request, response) => {
 
     const request_body_json = JSON.parse(request.body);
-
     console.log(validate(request_body_json, USER_SCHEMA, { throwError: true }));
     
     const new_user = request_body_json;
@@ -66,29 +65,42 @@ const offer_handler = (request, response) => {
 
 };
 
+const authenticate_handler = (request, response) => {
+    response.send({
+        "authenticated": true
+    });
+};
 
+const savefile_handler = (request, response) => {
+    const identifier = request.params["identifier"];
+    fs.writeFile(
+        identifier + ".json",
+        JSON.stringify(store)
+    )
+}
+//make load handler
 
-
-//static handler
-const my_webpage = (request, response) => {
-    response.send(`
-    <html>
-    <head>
-    </head>
-    <body>
-    <p>Hello World!</p>
-    <input placeholder="Enter a value">
-    </body>
-    </html>`)
-    };
+const loadfile_handler = (request, response) => {
+    const identifier = request.params["identifier"];
+    fs.readFile(
+        "./test.txt",
+        "utf8",
+        (err,data) => {
+            if (err) {
+                throw err;
+            } 
+            console.log(data);
+        }
+    )
+}
 
 app.get('/json/:identifier', get_handler);
-//app.post('/json/:identifier', post_handler);
-//app.get('/front_page', my_webpage);
-//app.post('/test', all_post_handler);
-app.use('/',express.static(path.join(__dirname, 'static')));
-
-
+app.post('/json/:identifier', post_handler);
+app.post('/test', all_post_handler);
+//app.use('/',express.static(path.join(__dirname, 'static')));
+app.post('/authenticate', authenticate_handler);
+app.get('/save/:identifier', savefile_handler);
+app.get('/load/:identifier', loadfile_handler);
 
 
 

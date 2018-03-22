@@ -1,0 +1,32 @@
+{
+    "federal_identifcation_number": "",
+    "name_of_llc": "",
+    "street_address": "",
+    "character_of_business" : "",
+    "date_of_dissolution" : "",
+    "resident_agent" : {
+        "name" : "",
+        "street_address" : ""
+        },
+    "business_location" : {
+        "name" : "",
+        "street_address" : ""
+    },
+    "authorized_personnel" : [
+       { "name" : "",
+        "street_address" : ""
+        },
+        {
+        "name" : "",
+        "street_address" : ""
+        }
+    ],
+    "office_location" : {
+        "name" : "",
+        "street_address" : ""
+        },
+    "additional_matters" : "",
+    "authorized_signature" : ""
+    
+ }
+    

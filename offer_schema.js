@@ -34,6 +34,7 @@ OFFERSCHEMA = {
         },
         "type": "business"
     },
+    //make this an array
     "documents_attached" : {"type": "string"}
 }
 
