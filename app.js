@@ -97,7 +97,7 @@ const loadfile_handler = (request, response) => {
 app.get('/json/:identifier', get_handler);
 app.post('/json/:identifier', post_handler);
 app.post('/test', all_post_handler);
-//app.use('/',express.static(path.join(__dirname, 'static')));
+app.use('/',express.static(path.join(__dirname, 'static')));
 app.post('/authenticate', authenticate_handler);
 app.get('/save/:identifier', savefile_handler);
 app.get('/load/:identifier', loadfile_handler);
