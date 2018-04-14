@@ -1,29 +1,16 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
+
 const fs = require('fs');
 const validate = require('jsonschema').validate;
-const capitalreserve_schema = require('./capital_reserve_schema.js');
-const USER_SCHEMA = require('./USER_SCHEMA.js');
-const STUDENTLOAN_SCHEMA = require('./student_loan_schema.js');
-const REPAYMENT_SCHEMA = require('./repayment_schema.js');
-const OFFER_SCHEMA = require('./offer_schema.js');
 
 
-app.use(bodyParser.text({
-    type: function(req) {
-        return 'text';
-    }
-}));
+const app = express();
 
-const store = {
-    "cat_profile": {
-        "name": "cat",
-        "location": "boston",
-        "job": "developer"
-    }
-}
+app.use(bodyParser.text({ type: () => 'text' }))
+
+const store = {}
 
 const get_handler = (request, response) => {
     const identifier = request.params["identifier"];
