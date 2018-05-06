@@ -19,5 +19,4 @@ const load_validator = () => {
     })
 
   return new_validator
-
 }

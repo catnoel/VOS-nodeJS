@@ -1,19 +1,15 @@
 
 // Require the express engine.
 const express = require('express');
-
-
 const bodyParser = require("body-parser");
 
 const fs = require('fs');
 const validate = require('jsonschema').validate;
 
-
 const path = require('path');
 
 // Create an express application object.
 const app = express();
-
 app.use(bodyParser.text({ type: () => 'text' }))
 
 const store = {}
