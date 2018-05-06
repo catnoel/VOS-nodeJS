@@ -1,0 +1,241 @@
+{
+  "type": "object",
+  "properties": {
+    "partnership_employer_identification_number": {
+      "title": "Partnership's employer identification number",
+      "type": "string"
+    },
+    "partnership_name": {
+      "title": "Partnership's name",
+      "type": "string"
+    },
+    "partnership_address": {
+      "title": "Partnership's address",
+      "type": "string"
+    },
+    "partnership_city": {
+      "title": "Partnership's city",
+      "type": "string"
+    },
+    "partnership_state": {
+      "title": "Partnership's state",
+      "type": "string"
+    },
+    "partnership_zip_code": {
+      "title": "Partnership's  ZIP code",
+      "type": "string"
+    },
+    "irs_filing_center": {
+      "title": "IRS Center where partnership filed return",
+      "type": "string"
+    },
+    "is_publicly_traded_partnership": {
+      "title": "is_publicly_traded_partnership",
+      "type": "boolean"
+    },
+    "partner_identification_number": {
+      "title": "Partner's identifying number",
+      "type": "number"
+    },
+    "partner_name": {
+      "title": "partner_name",
+      "type": "string"
+    },
+    "partner_address": {
+      "title": "partner_address",
+      "type": "string"
+    },
+    "partner_city": {
+      "title": "partner_city",
+      "type": "string"
+    },
+    "partner_state": {
+      "title": "partner_state",
+      "type": "string"
+    },
+    "partner_zip_code": {
+      "title": "partner_zip_code",
+      "type": "string"
+    },
+    "partner_limitation": {
+      "title": "partner_limitation",
+      "type": "string"
+    },
+    "partner_domesticity": {
+      "title": "partner_domesticity",
+      "type": "string"
+    },
+    "partner_entity_type": {
+      "title": "partner_entity_type",
+      "type": "string"
+    },
+    "partner_is_retirement_plan": {
+      "title": "partner_is_retirement_plan",
+      "type": "string"
+    },
+    "partner_beginning_profit_share": {
+      "title": "partner_beginning_profit_share",
+      "type": "string"
+    },
+    "partner_ending_profit_share": {
+      "title": "partner_ending_profit_share",
+      "type": "string"
+    },
+    "partner_beginning_loss_share": {
+      "title": "partner_beginning_loss_share",
+      "type": "string"
+    },
+    "partner_ending_loss_share": {
+      "title": "partner_ending_loss_share",
+      "type": "string"
+    },
+    "partner_beginning_capital_share": {
+      "title": "partner_beginning_capital_share",
+      "type": "string"
+    },
+    "partner_ending_capital_share": {
+      "title": "partner_ending_capital_share",
+      "type": "string"
+    },
+    "partner_nonrecourse_liabilities": {
+      "title": "partner_nonrecourse_liabilities",
+      "type": "string"
+    },
+    "partner_qualified_nonrecourse_financing": {
+      "title": "partner_qualified_nonrecourse_financing",
+      "type": "string"
+    },
+    "partner_recourse": {
+      "title": "partner_recourse",
+      "type": "string"
+    },
+    "partner_beginning_capital_account": {
+      "title": "partner_beginning_capital_account",
+      "type": "string"
+    },
+    "partner_capital_contributed_during_this_year": {
+      "title": "partner_capital_contributed_during_this_year",
+      "type": "string"
+    },
+    "partner_current_year_increase_or_decrease": {
+      "title": "partner_current_year_increase_or_decrease",
+      "type": "string"
+    },
+    "partner_withdrawals_and_distributions": {
+      "title": "partner_withdrawals_and_distributions",
+      "type": "string"
+    },
+    "partner_ending_capital_account": {
+      "title": "partner_ending_capital_account",
+      "type": "string"
+    },
+    "partner_tax_basis": {
+      "title": "partner_tax_basis",
+      "type": "string"
+    },
+    "partner_gaap": {
+      "title": "partner_gaap",
+      "type": "string"
+    },
+    "partner_section_704b_book": {
+      "title": "whatever",
+      "type": "boolean"
+    },
+    "partner_other": {
+      "title": "partner_other",
+      "type": "string"
+    },
+    "partner_contribution_with_built_in_gain_or_loss": {
+      "title": "partner_contribution_with_built_in_gain_or_loss",
+      "type": "string"
+    },
+    "ordinary_business_income_or_loss": {
+      "title": "ordinary_business_income_or_loss",
+      "type": "string"
+    },
+    "net_rental_real_estate_income_or_loss": {
+      "title": "net_rental_real_estate_income_or_loss",
+      "type": "string"
+    },
+    "other_net_rental_income_or_loss": {
+      "title": "other_net_rental_income_or_loss",
+      "type": "string"
+    },
+    "guaranteed_payments": {
+      "title": "guaranteed_payments",
+      "type": "string"
+    },
+    "interest_income": {
+      "title": "interest_income",
+      "type": "string"
+    },
+    "ordinary_dividends": {
+      "title": "ordinary_dividends",
+      "type": "string"
+    },
+    "royalties": {
+      "title": "royalties",
+      "type": "string"
+    },
+    "net_short_term_capital_gain_or_loss": {
+      "title": "net_short_term_capital_gain_or_loss",
+      "type": "string"
+    },
+    "net_long_term_capital_gain_or_loss": {
+      "title": "net_long_term_capital_gain_or_loss",
+      "type": "string"
+    },
+    "collectibles_gain_or_loss": {
+      "title": "collectibles_gain_or_loss",
+      "type": "string"
+    },
+    "unrecaptured_section_1250_gain": {
+      "title": "unrecaptured_section_1250_gain",
+      "type": "string"
+    },
+    "net_section_1231_gain_or_loss": {
+      "title": "net_section_1231_gain_or_loss",
+      "type": "string"
+    },
+    "other_income_or_loss": {
+      "title": "other_income_or_loss",
+      "type": "string"
+    },
+    "section_179_deduction": {
+      "title": "section_179_deduction",
+      "type": "string"
+    },
+    "other_deductions": {
+      "title": "other_deductions",
+      "type": "string"
+    },
+    "self_employment_earnings_or_loss": {
+      "title": "self_employment_earnings_or_loss",
+      "type": "string"
+    },
+    "credits": {
+      "title": "credits",
+      "type": "string"
+    },
+    "foreign_transactions": {
+      "title": "foreign_transactions",
+      "type": "string"
+    },
+    "alternative_minimum_tax_items": {
+      "title": "alternative_minimum_tax_items",
+      "type": "string"
+    },
+    "tax_exempt_income_and_nondeductible_expenses": {
+      "title": "tax_exempt_income_and_nondeductible_expenses",
+      "type": "string"
+    },
+    "distributions": {
+      "title": "distributions",
+      "type": "string"
+    },
+    "other_informations": {
+      "title": "other_informations",
+      "type": "string"
+    }
+  }
+}
