@@ -28,7 +28,7 @@
         "type": "string",
         "pattern": "([0-9] {5})"
       },
-      "type": "business"
+      "type": "object"
     },
     "tax_identification_number": {
       "type": "string",

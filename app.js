@@ -85,63 +85,56 @@ app.get('/irs/form-k1/2017/ledger', (request, response) => {
     response.send("You got it!")
 })
 
-// app.post('/user/brianpl/', (request, response) => {
-//     console.log(request.body);
-//     const user_data = JSON.parse(request.body);
-
-//     fs.writeFile(
-//         "data/user/brianpl.json",
-//         JSON.stringify(user_data)
-//     )
-
-// })
-
-//fs handler for all user data
-// app.get('/user/:username', (request, response) => {
-//     const username = request.params["username"];
-//     const json_folder = "data/user/" + username + ".json";
-
-//     fs.readFile(
-//         json_folder,
-//         "utf8",
-//         (err, data) => {
-//             if (err) {
-//                 throw err;
-//             }
-//             response.send(data);
-//         }
-//     )
-// })
-
+// fs handler for all JSON in data file
 const load_json = (request, response) => {
-    let filename = request.params["filename"];
-    const username = request.params["identifier"]
-    let json_folder = '/data', filename, username;
-    console.log("first" + json_folder); 
+    const foldername = request.params["foldername"];
+    const username = request.params["username"];
+    const json_folder = "data/" + foldername + "/" + username + ".json";
 
+    console.log (json_folder);
+    console.log(username);
     fs.readFile(
-        __dirname + json_folder + ".json",
+        json_folder,
         "utf8",
         (err, data) => {
             if (err) {
                 throw err;
             }
             response.send(data);
-            console.log("second:" + json_folder)
+        }
+    )
+}
+//fs handler for all JSON schemas
+const load_schema = (request, response) => {
+    const schema = request.params["schema"];
+    const json_folder = "schema/" + schema + ".schema.json";
+
+    console.log (json_folder);
+    console.log(schema);
+    fs.readFile(
+        json_folder,
+        "utf8",
+        (err, data) => {
+            if (err) {
+                throw err;
+            }
+            response.send(data);
         }
     )
 }
 
-// app.post('/user/:username', (request, response) => {
-//     const username = request.params["username"];
-//     const user_data = JSON.parse(request.body);
 
-//     fs.writeFile(
-//         "data/user/" + username + ".json",
-//         JSON.stringify(user_data)
-//     )
+app.post('/user/:username', (request, response) => {
+    const username = request.params["username"];
+    const user_data = JSON.parse(request.body);
 
-// })
+    fs.writeFile(
+        "data/user/" + username + ".json",
+        JSON.stringify(user_data)
+    )
+
+    console.log(user_data);
+})
 
 
 
@@ -171,7 +164,9 @@ app.post('/authenticate', post_authenticate);
 app.get('/save/:identifier', get_save);
 app.get('/load/:identifier', get_load);
 app.use('/',express.static(path.join(__dirname, 'static')));
-app.get('/:filename/:username', load_json);
+app.get('/data/:foldername/:username', load_json);
+app.get('/schema/:schema', load_schema);
+
 
 
 port_number = 8888

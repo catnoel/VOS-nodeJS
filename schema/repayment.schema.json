@@ -25,7 +25,7 @@
         "type": "string",
         "pattern": "([0-9] {5})"
       },
-      "type": "business"
+      "type": "object"
     },
     "loan_name": {
       "type": "string"
