@@ -66,7 +66,6 @@ const get_save = (request, response) => {
     )
 }
 //make load handler
-
 const get_load = (request, response) => {
     const identifier = request.params["identifier"];
     fs.readFile(
@@ -86,55 +85,63 @@ app.get('/irs/form-k1/2017/ledger', (request, response) => {
     response.send("You got it!")
 })
 
-app.post('/user/brianpl/', (request, response) => {
-    console.log(request.body);
-    const user_data = JSON.parse(request.body);
+// app.post('/user/brianpl/', (request, response) => {
+//     console.log(request.body);
+//     const user_data = JSON.parse(request.body);
 
-    fs.writeFile(
-        "data/user/brianpl.json",
-        JSON.stringify(user_data)
-    )
+//     fs.writeFile(
+//         "data/user/brianpl.json",
+//         JSON.stringify(user_data)
+//     )
 
-})
+// })
 
-app.get('/user/brianpl', (request, response) => {
+//fs handler for all user data
+// app.get('/user/:username', (request, response) => {
+//     const username = request.params["username"];
+//     const json_folder = "data/user/" + username + ".json";
+
+//     fs.readFile(
+//         json_folder,
+//         "utf8",
+//         (err, data) => {
+//             if (err) {
+//                 throw err;
+//             }
+//             response.send(data);
+//         }
+//     )
+// })
+
+const load_json = (request, response) => {
+    let filename = request.params["filename"];
+    const username = request.params["identifier"]
+    let json_folder = '/data', filename, username;
+    console.log("first" + json_folder); 
+
     fs.readFile(
-        "data/user/brianpl.json",
+        __dirname + json_folder + ".json",
         "utf8",
         (err, data) => {
             if (err) {
                 throw err;
             }
             response.send(data);
+            console.log("second:" + json_folder)
         }
     )
-})
+}
 
-app.get('/user/:username', (request, response) => {
-    const username = request.params["username"];
+// app.post('/user/:username', (request, response) => {
+//     const username = request.params["username"];
+//     const user_data = JSON.parse(request.body);
 
-    fs.readFile(
-        "data/user/" + username + ".json",
-        "utf8",
-        (err, data) => {
-            if (err) {
-                throw err;
-            }
-            response.send(data);
-        }
-    )
-})
+//     fs.writeFile(
+//         "data/user/" + username + ".json",
+//         JSON.stringify(user_data)
+//     )
 
-app.post('/user/:username', (request, response) => {
-    const username = request.params["username"];
-    const user_data = JSON.parse(request.body);
-
-    fs.writeFile(
-        "data/user/" + username + ".json",
-        JSON.stringify(user_data)
-    )
-
-})
+// })
 
 
 
@@ -164,6 +171,7 @@ app.post('/authenticate', post_authenticate);
 app.get('/save/:identifier', get_save);
 app.get('/load/:identifier', get_load);
 app.use('/',express.static(path.join(__dirname, 'static')));
+app.get('/:filename/:username', load_json);
 
 
 port_number = 8888
