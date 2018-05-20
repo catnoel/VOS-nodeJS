@@ -8,6 +8,18 @@ const validate = require('jsonschema').validate;
 
 const path = require('path');
 
+
+const is_not_json = (str) => {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return true;
+    }
+    return false;
+}
+
+
+
 // Create an express application object.
 const app = express();
 app.use(bodyParser.text({ type: () => 'text' }))
@@ -87,40 +99,64 @@ app.get('/irs/form-k1/2017/ledger', (request, response) => {
 
 // fs handler for all JSON in data file
 const load_json = (request, response) => {
-    const foldername = request.params["foldername"];
-    const username = request.params["username"];
-    const json_folder = "data/" + foldername + "/" + username + ".json";
-
-    console.log (json_folder);
-    console.log(username);
+    const data_path = "data/" + request.params[0] + ".json"
     fs.readFile(
-        json_folder,
+        data_path,
         "utf8",
         (err, data) => {
             if (err) {
                 throw err;
             }
+            // TODO: Confirm it is JSON before sending it.
             response.send(data);
         }
     )
 }
+
 //fs handler for all JSON schemas
 const load_schema = (request, response) => {
-    const schema = request.params["schema"];
-    const json_folder = "schema/" + schema + ".schema.json";
-
-    console.log (json_folder);
-    console.log(schema);
+    const schema_path = "schema/" + request.params[0] + ".schema.json";
     fs.readFile(
-        json_folder,
+        schema_path,
         "utf8",
         (err, data) => {
             if (err) {
-                throw err;
+                response.send(404)
             }
-            response.send(data);
-        }
-    )
+
+            if(is_not_json(data)) {
+                response.send("Found a non-JSON file.")
+            }
+
+            // We now know that data is json, from here on out.
+            const json = JSON.parse(data)
+
+            // Now, confirm json is json-schema.
+            try {
+                fs.readFile("schema/json-schema.schema.json", "utf8", (_, json_schema_schema_string) => {
+                    if(is_not_json(json_schema_schema_string)) {
+                        response.send("json-schema.schema.json is corrupt.")
+                    }
+
+                    // We now know that json_schema_schema_string is json, from here on out.
+                    const json_schema_schema = JSON.parse(json_schema_schema_string)
+
+                    // Assume json_schema_schema is JSON, and is a schema...
+                    try {
+                        validate(json, json_schema_schema, { throwError: true })
+                    } catch(m) {
+                        response.send("JSON is invalid. Error: " + m.message)
+                    }
+                    // json is a json schema!
+
+                    response.send(data)
+
+                })
+            } catch(_) {
+                response.send("Found a non-JSON-Schema file.")
+            }
+        })
+
 }
 
 
@@ -156,7 +192,6 @@ app.post('/accounts/student-loans/transactions/', (request, response) => {
 })
 
 
-
 app.get('/json/:identifier', get_json);
 app.post('/json/:identifier', post_json);
 app.post('/test', test_handler);
@@ -164,8 +199,12 @@ app.post('/authenticate', post_authenticate);
 app.get('/save/:identifier', get_save);
 app.get('/load/:identifier', get_load);
 app.use('/',express.static(path.join(__dirname, 'static')));
-app.get('/data/:foldername/:username', load_json);
-app.get('/schema/:schema', load_schema);
+
+//user data and schema routes
+app.get(new RegExp("/data/(.*)"), load_json);
+app.get(new RegExp("/schema/(.*)"), load_schema);
+
+
 
 
 
