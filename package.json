@@ -1,0 +1,26 @@
+{
+  "name": "nodefront",
+  "version": "1.0.0",
+  "description": "Storefront in NodeJS",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catnoel/VOS-nodeJS.git"
+  },
+  "author": "Cat Noel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catnoel/VOS-nodeJS/issues"
+  },
+  "homepage": "https://github.com/catnoel/VOS-nodeJS#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jsonschema": "^1.2.4"
+  }
+}

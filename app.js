@@ -18,8 +18,6 @@ const is_not_json = (str) => {
     return false;
 }
 
-
-
 // Create an express application object.
 const app = express();
 app.use(bodyParser.text({ type: () => 'text' }))
@@ -27,9 +25,21 @@ app.use(bodyParser.text({ type: () => 'text' }))
 const store = {}
 
 const get_json = (request, response) => {
-    const identifier = request.params["identifier"];
-    response.send(store[identifier]);
+  const identifier = request.params["identifier"]
+  response.send(store[identifier])
+}
+
+const put_json = (request, response) => {
+    const json = JSON.parse(request.body)
+    // if typeof new_profile is string throw error
+    if(typeof new_profile === "string") {
+        throw new Error("Service does not handle raw strings.")
     }
+    const identifier = request.params[0]
+    console.log("Okay, our identifier is: " + identifier)
+    fs.writeFile("data/" + identifier + ".json", JSON.stringify(json), () => {})
+
+}
 
 const post_json = (request, response) => {
     let new_profile = request.body
@@ -192,17 +202,18 @@ app.post('/accounts/student-loans/transactions/', (request, response) => {
 })
 
 
-app.get('/json/:identifier', get_json);
-app.post('/json/:identifier', post_json);
-app.post('/test', test_handler);
-app.post('/authenticate', post_authenticate);
-app.get('/save/:identifier', get_save);
-app.get('/load/:identifier', get_load);
-app.use('/',express.static(path.join(__dirname, 'static')));
+// app.get('/json/:identifier', get_json);
+// app.post('/json/:identifier', post_json);
+// app.post('/test', test_handler);
+// app.post('/authenticate', post_authenticate);
+// app.get('/save/:identifier', get_save);
+// app.get('/load/:identifier', get_load);
 
 //user data and schema routes
 app.get(new RegExp("/data/(.*)"), load_json);
+app.put(new RegExp("/data/(.*)"), put_json)
 app.get(new RegExp("/schema/(.*)"), load_schema);
+app.use('/',express.static(path.join(__dirname, 'static')));
 
 
 

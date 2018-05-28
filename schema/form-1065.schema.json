@@ -1,6 +1,14 @@
 {
   "type": "object",
   "properties": {
+    "beginning_date": {
+      "title": "Beginning Date",
+      "type": "string"
+    },
+    "ending_date": {
+      "title": "Ending Date",
+      "type": "string"
+    },
     "partnership_employer_identification_number": {
       "title": "Partnership's employer identification number",
       "type": "string"
@@ -30,7 +38,7 @@
       "type": "string"
     },
     "is_publicly_traded_partnership": {
-      "title": "is_publicly_traded_partnership",
+      "title": "Is this a publicly traded partnership?",
       "type": "boolean"
     },
     "partner_identification_number": {
@@ -237,5 +245,6 @@
       "title": "other_informations",
       "type": "string"
     }
-  }
+  },
+  "required": ["partnership_name", "partnership_employer_identification_number", "beginning_date"]
 }

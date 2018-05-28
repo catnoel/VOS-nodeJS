@@ -1,6 +1,4 @@
 
-console.log("Hello World");
-
 class LoginPanel {
     constructor(){
 
@@ -26,8 +24,8 @@ $(document).ready(() => {
             (data) => {console.log(data)},
             "json"
         )
-        console.log("posted");
+        
     })
-    console.log("done");
+    
 
 })
